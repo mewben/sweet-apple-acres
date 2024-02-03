@@ -8,7 +8,7 @@ export default async function HomePage() {
     <div role="list">
       {products.map((product) => {
         return (
-          <div key={product.id} role="list-item">
+          <div key={product.id} role="listitem">
             <Link href={`/product/${product.id}`}>{product.name}</Link>
           </div>
         );
