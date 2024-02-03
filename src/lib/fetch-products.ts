@@ -13,3 +13,15 @@ export async function fetchProducts(): Promise<Product[]> {
     return [];
   }
 }
+
+export async function fetchProduct(id: string): Promise<Product | null> {
+  try {
+    const result = await fetch(
+      `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products/${id}`
+    );
+    return await result.json();
+  } catch (error) {
+    console.log("Error fetching product: ", error);
+    return null;
+  }
+}
