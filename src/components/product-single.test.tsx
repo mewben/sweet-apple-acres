@@ -47,7 +47,9 @@ describe("Product Single Page", () => {
       product1.name
     );
     expect(screen.getByText(product1.description)).toBeDefined();
-    expect(screen.getByText(product1.price)).toBeDefined();
+    expect(screen.getByLabelText("price").textContent).toMatch(
+      String(product1.price)
+    );
     const imgParts = product1.image.split("/");
     expect(screen.getByRole("img").getAttribute("src")).toMatch(
       imgParts[imgParts.length - 1]
@@ -56,5 +58,14 @@ describe("Product Single Page", () => {
       screen.getByLabelText(`Rating: ${product1.rating}/5.0`)
     ).toBeDefined();
     expect(screen.getByRole("button", { name: "Add to cart" })).toBeDefined();
+  });
+
+  test("should disable add to cart button if isAvailable=false", () => {
+    render(<ProductSingle product={product2} />);
+    expect(
+      screen
+        .getByRole("button", { name: "Add to cart" })
+        .getAttribute("disabled")
+    ).not.toBeNull();
   });
 });

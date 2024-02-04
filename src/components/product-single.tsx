@@ -27,22 +27,19 @@ export default function ProductSingle({ product }: Props) {
         <h1 className="text-2xl font-semibold tracking-tight">
           {product.name}
         </h1>
-        <p className="text-4xl">${product.price}</p>
+        <p className="text-4xl" aria-label="price">
+          ${product.price}
+        </p>
         <Rating
           value={Math.round(product.rating)}
           tooltip={`${product.rating}/5.0`}
         />
         {!product.isAvailable && (
-          <Badge
-            variant={"destructive"}
-            aria-label="sold out"
-            className="absolute top-0 right-0 m-2"
-          >
-            Sold out
+          <Badge variant={"destructive"} aria-label="out of stock">
+            Out of stock
           </Badge>
         )}
-
-        <AddToCart />
+        <AddToCart disabled={!product.isAvailable} />
         <div className="pt-12">
           <h3 className="font-semibold mb-4">Description</h3>
           <div className="prose">{product.description}</div>
