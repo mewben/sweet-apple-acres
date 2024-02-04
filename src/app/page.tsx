@@ -1,18 +1,12 @@
-import Link from "next/link";
+import ProductsList from "~/components/products-list";
 import { fetchProducts } from "~/lib/fetch-products";
 
 export default async function HomePage() {
   const products = await fetchProducts();
 
   return (
-    <div role="list">
-      {products.map((product) => {
-        return (
-          <div key={product.id} role="listitem">
-            <Link href={`/product/${product.id}`}>{product.name}</Link>
-          </div>
-        );
-      })}
+    <div>
+      <ProductsList products={products} />
     </div>
   );
 }
