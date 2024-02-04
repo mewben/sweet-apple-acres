@@ -1,3 +1,4 @@
+import ProductSingle from "~/components/product-single";
 import { fetchProduct } from "~/lib/fetch-products";
 
 type Props = {
@@ -18,7 +19,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div>
-      <h1>{product.name}</h1>
+      <ProductSingle product={product} />
     </div>
   );
 }

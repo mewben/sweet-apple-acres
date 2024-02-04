@@ -1,6 +1,6 @@
 import { expect, test, describe, afterEach } from "vitest";
 import { render, screen, cleanup } from "~/lib/test-utils";
-import ProductCard from "./product-card";
+import ProductSingle from "./product-single";
 
 const product1 = {
   id: "6dbf5cb7-828a-4375-8796-40d2cdfa532d",
@@ -40,35 +40,21 @@ afterEach(() => {
   cleanup(); // cleanup the dom for each test
 });
 
-describe("Product Card", () => {
-  test("should show some info on the product", () => {
-    render(<ProductCard product={product1} />);
-    expect(screen.getByRole("listitem")).toBeDefined();
-    expect(screen.getByText(product1.name)).toBeDefined();
-    expect(screen.queryByLabelText("not available")).toBeNull();
-
+describe("Product Single Page", () => {
+  test("should show all info on the product", () => {
+    render(<ProductSingle product={product1} />);
+    expect(screen.getByRole("heading", { level: 1 }).innerHTML).toMatch(
+      product1.name
+    );
+    expect(screen.getByText(product1.description)).toBeDefined();
+    expect(screen.getByText(product1.price)).toBeDefined();
     const imgParts = product1.image.split("/");
     expect(screen.getByRole("img").getAttribute("src")).toMatch(
       imgParts[imgParts.length - 1]
     );
-    expect(screen.getByText(product1.price)).toBeDefined();
-  });
-
-  test("should show sold out tag if isAvailable = false", () => {
-    render(<ProductCard product={product2} />);
-    expect(screen.getByRole("listitem")).toBeDefined();
-    expect(screen.getByLabelText("sold out")).toBeDefined();
-  });
-
-  test("should show image placeholder if no image supplied", () => {
-    render(<ProductCard product={product3} />);
-    expect(screen.getByRole("img").getAttribute("src")).toMatch("placeholder");
-  });
-
-  test("should show rating", () => {
-    render(<ProductCard product={product1} />);
     expect(
       screen.getByLabelText(`Rating: ${product1.rating}/5.0`)
     ).toBeDefined();
+    expect(screen.getByRole("button", { name: "Add to cart" })).toBeDefined();
   });
 });
