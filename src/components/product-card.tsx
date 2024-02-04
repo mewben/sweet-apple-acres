@@ -30,10 +30,10 @@ export default function ProductCard({ product }: Props) {
       {!product.isAvailable && (
         <Badge
           variant={"destructive"}
-          aria-label="sold out"
+          aria-label="out of stock"
           className="absolute top-0 right-0 m-2"
         >
-          Sold out
+          Out of stock
         </Badge>
       )}
       <Rating

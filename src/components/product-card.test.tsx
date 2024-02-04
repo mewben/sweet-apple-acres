@@ -54,10 +54,10 @@ describe("Product Card", () => {
     expect(screen.getByText(product1.price)).toBeDefined();
   });
 
-  test("should show sold out tag if isAvailable = false", () => {
+  test("should show out of stock tag if isAvailable = false", () => {
     render(<ProductCard product={product2} />);
     expect(screen.getByRole("listitem")).toBeDefined();
-    expect(screen.getByLabelText("sold out")).toBeDefined();
+    expect(screen.getByLabelText("out of stock")).toBeDefined();
   });
 
   test("should show image placeholder if no image supplied", () => {
