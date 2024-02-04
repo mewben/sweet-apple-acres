@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "~/lib/types";
+import { Rating } from "./ui/rating";
 
 type Props = {
   product: Product;
@@ -24,6 +25,10 @@ export default function ProductCard({ product }: Props) {
       {!product.isAvailable && (
         <span aria-label="not available">Not Available</span>
       )}
+      <Rating
+        value={Math.round(product.rating)}
+        tooltip={`${product.rating}/5.0`}
+      />
     </Link>
   );
 }

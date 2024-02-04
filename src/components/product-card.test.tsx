@@ -1,5 +1,5 @@
 import { expect, test, describe, afterEach } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup } from "~/lib/test-utils";
 import ProductCard from "./product-card";
 
 const product1 = {
@@ -63,5 +63,12 @@ describe("Product Card", () => {
   test("should show image placeholder if no image supplied", () => {
     render(<ProductCard product={product3} />);
     expect(screen.getByRole("img").getAttribute("src")).toMatch("placeholder");
+  });
+
+  test("should show rating", () => {
+    render(<ProductCard product={product1} />);
+    expect(
+      screen.getByLabelText(`Rating: ${product1.rating}/5.0`)
+    ).toBeDefined();
   });
 });

@@ -1,5 +1,5 @@
 import { expect, test, describe, afterEach } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup } from "~/lib/test-utils";
 import ProductsList from "./products-list";
 
 const fakeProducts = [
