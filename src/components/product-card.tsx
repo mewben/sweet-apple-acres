@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "~/lib/types";
 import { Rating } from "./ui/rating";
+import { Badge } from "./ui/badge";
 
 type Props = {
   product: Product;
@@ -9,7 +10,11 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
   return (
-    <Link href={`/product/${product.id}`} className="group" role="listitem">
+    <Link
+      href={`/product/${product.id}`}
+      className="group relative"
+      role="listitem"
+    >
       <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
         <Image
           src={product.image ?? "/placeholder-img.jpg"}
@@ -23,7 +28,13 @@ export default function ProductCard({ product }: Props) {
       <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
       <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
       {!product.isAvailable && (
-        <span aria-label="not available">Not Available</span>
+        <Badge
+          variant={"destructive"}
+          aria-label="sold out"
+          className="absolute top-0 right-0 m-2"
+        >
+          Sold out
+        </Badge>
       )}
       <Rating
         value={Math.round(product.rating)}
