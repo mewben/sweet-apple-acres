@@ -26,7 +26,7 @@ const footerLinks = [
 ];
 export const Footer = () => {
   return (
-    <footer className="border-t py-12 mt-12">
+    <footer className="border-t py-12 mt-24">
       <div className="container">
         <div className="flex flex-col md:flex-row items-start">
           <Logo className="mb-4 scale-75 opacity-50" />
