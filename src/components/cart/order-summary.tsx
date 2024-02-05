@@ -6,6 +6,7 @@ import { OrderItem } from "./order-item";
 import { CartItem } from "~/lib/types";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Price } from "./price";
 
 const SHIPPING_FEE = 0; // Hardcoded for now;
 const TAX = 0; // 5%, Hardcoded for now;
@@ -28,19 +29,27 @@ const OrderSummary = ({ items = {}, subTotal, tax, total }: Props) => {
       <dl className="gap-4 flex flex-col pt-4">
         <div className="flex justify-between">
           <dt>Subtotal</dt>
-          <dt>${subTotal}</dt>
+          <dt>
+            <Price amount={subTotal} currencyCode="USD" />
+          </dt>
         </div>
         <div className="flex justify-between">
           <dt>Shipping</dt>
-          <dt>${SHIPPING_FEE}</dt>
+          <dt>
+            <Price amount={SHIPPING_FEE} currencyCode="USD" />
+          </dt>
         </div>
         <div className="flex justify-between">
           <dt>Taxes ({TAX}%)</dt>
-          <dt>${tax}</dt>
+          <dt>
+            <Price amount={tax} currencyCode="USD" />
+          </dt>
         </div>
         <div className="flex justify-between border-t font-semibold text-lg pt-4 tracking-tight">
           <dt>Total</dt>
-          <dt>${total}</dt>
+          <dt>
+            <Price amount={total} currencyCode="USD" />
+          </dt>
         </div>
       </dl>
     </>

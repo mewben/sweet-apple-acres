@@ -3,6 +3,7 @@ import { Product } from "~/lib/types";
 import { Rating } from "./ui/rating";
 import { Badge } from "./ui/badge";
 import { AddToCart } from "./cart/add-to-cart";
+import { Price } from "./cart/price";
 
 type Props = {
   product: Product;
@@ -29,7 +30,7 @@ export default function ProductSingle({ product }: Props) {
           {product.name}
         </h1>
         <p className="text-4xl" aria-label="price">
-          ${product.price}
+          <Price amount={product.price} currencyCode="USD" />
         </p>
         <Rating
           value={Math.round(product.rating)}

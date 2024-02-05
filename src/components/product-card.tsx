@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Product } from "~/lib/types";
 import { Rating } from "./ui/rating";
 import { Badge } from "./ui/badge";
+import { Price } from "./cart/price";
 
 type Props = {
   product: Product;
@@ -26,7 +27,9 @@ export default function ProductCard({ product }: Props) {
         />
       </div>
       <h3 className="mt-4 text-sm">{product.name}</h3>
-      <p className="mt-1 text-lg font-medium">${product.price}</p>
+      <p className="mt-1 text-lg font-medium">
+        <Price amount={product.price} currencyCode="USD" />
+      </p>
       {!product.isAvailable && (
         <Badge
           variant={"destructive"}

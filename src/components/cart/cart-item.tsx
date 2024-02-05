@@ -4,6 +4,7 @@ import React from "react";
 import { CartItem as CartItemType } from "~/lib/types";
 import { Button } from "../ui/button";
 import { SheetClose } from "../ui/sheet";
+import { Price } from "./price";
 
 type Props = {
   item: CartItemType;
@@ -37,7 +38,9 @@ export const CartItem = ({
               <Link href={`/product/${item.id}`}>{item.name}</Link>
             </SheetClose>
           </h3>
-          <p>${item.price * item.quantity}</p>
+          <p>
+            <Price amount={item.price * item.quantity} currencyCode="USD" />
+          </p>
         </div>
         <div className="flex justify-between">
           <div className="flex items-center rounded-lg border">

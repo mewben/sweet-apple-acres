@@ -13,6 +13,7 @@ import {
 import { CartItem } from "./cart-item";
 import { useCart } from "./cart-store";
 import Link from "next/link";
+import { Price } from "./price";
 
 export const CartSummary = () => {
   const { items, updatedAt, isOpen, toggleCart, increment, decrement, remove } =
@@ -48,7 +49,9 @@ export const CartSummary = () => {
           <div className="py-8 flex flex-col sm:flex-col border-t">
             <div className="flex justify-between text-lg font-medium">
               <p>Subtotal</p>
-              <p>${subTotal}</p>
+              <p>
+                <Price amount={subTotal} currencyCode="USD" />
+              </p>
             </div>
             <p className="mb-8 text-sm text-muted-foreground">
               Shipping and taxes calculated at checkout.
