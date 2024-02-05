@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProductSingle({ product }: Props) {
   return (
-    <div className="flex flex-col md:flex-row md:p-12 lg:gap-8">
+    <div className="flex flex-col md:flex-row md:p-12 md:gap-8">
       <div className="basis-full lg:basis-7/12">
         <div className="aspect-square text-center h-full w-full max-w-[512px] overflow-hidden rounded-lg mx-auto">
           <Image
@@ -39,7 +39,7 @@ export default function ProductSingle({ product }: Props) {
             Out of stock
           </Badge>
         )}
-        <AddToCart disabled={!product.isAvailable} />
+        <AddToCart product={product} disabled={!product.isAvailable} />
         <div className="pt-12">
           <h3 className="font-semibold mb-4">Description</h3>
           <div className="prose">{product.description}</div>

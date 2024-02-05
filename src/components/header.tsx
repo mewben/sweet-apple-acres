@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { CartIcon } from "./cart/cart-icon";
 
 export const Header = () => {
   return (
@@ -18,7 +19,9 @@ export const Header = () => {
           </Button>
         </div>
         <div className="flex w-1/3 justify-center">TODO: Search bar</div>
-        <div className="flex w-1/3 justify-end">TODO: Cart Icon</div>
+        <div className="flex w-1/3 justify-end">
+          <CartIcon />
+        </div>
       </div>
     </nav>
   );
