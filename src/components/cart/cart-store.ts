@@ -9,6 +9,9 @@ type State = {
 type Actions = {
   add: (product: Product) => void;
   toggleCart: (isOpen: boolean) => void;
+  increment: (productId: string) => void;
+  decrement: (productId: string) => void;
+  remove: (productId: string) => void;
 };
 
 export const useCart = create<State & Actions>((set) => ({
@@ -44,4 +47,57 @@ export const useCart = create<State & Actions>((set) => ({
       }
     }),
   toggleCart: (isOpen: boolean) => set(() => ({ isOpen })),
+  increment: (productId: string) =>
+    set((state) => {
+      const foundProduct = state.items[productId];
+      if (!foundProduct) return state;
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [productId]: {
+            ...state.items[productId],
+            quantity: state.items[productId].quantity + 1,
+          },
+        },
+      };
+    }),
+  decrement: (productId: string) =>
+    set((state) => {
+      const foundProduct = state.items[productId];
+      if (!foundProduct) return state;
+
+      if (foundProduct.quantity === 1) {
+        // remove product
+        const updatedItems = state.items;
+        delete updatedItems[productId];
+        return {
+          ...state,
+          items: updatedItems,
+        };
+      }
+
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [productId]: {
+            ...state.items[productId],
+            quantity: state.items[productId].quantity - 1,
+          },
+        },
+      };
+    }),
+  remove: (productId: string) =>
+    set((state) => {
+      const foundProduct = state.items[productId];
+      if (!foundProduct) return state;
+
+      const updatedItems = state.items;
+      delete updatedItems[productId];
+      return {
+        ...state,
+        items: updatedItems,
+      };
+    }),
 }));

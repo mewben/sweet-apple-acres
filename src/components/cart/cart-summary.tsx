@@ -7,8 +7,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
 } from "../ui/sheet";
@@ -16,7 +14,8 @@ import { CartItem } from "./cart-item";
 import { useCart } from "./cart-store";
 
 export const CartSummary = () => {
-  const { items, isOpen, toggleCart } = useCart();
+  const { items, isOpen, toggleCart, increment, decrement, remove } = useCart();
+  console.log("items", items);
 
   const subTotal = useMemo(() => {
     return Object.values(items).reduce(
@@ -34,7 +33,13 @@ export const CartSummary = () => {
         <div className="flex h-full flex-col justify-between overflow-hidden">
           <ScrollArea>
             {Object.values(items).map((item) => (
-              <CartItem item={item} key={item.id} />
+              <CartItem
+                item={item}
+                key={item.id}
+                onIncrement={increment}
+                onDecrement={decrement}
+                onRemove={remove}
+              />
             ))}
           </ScrollArea>
           <div className="py-8 flex flex-col sm:flex-col border-t">

@@ -6,9 +6,17 @@ import { Button } from "../ui/button";
 
 type Props = {
   item: CartItemType;
+  onIncrement: (id: string) => void;
+  onDecrement: (id: string) => void;
+  onRemove: (id: string) => void;
 };
 
-export const CartItem = ({ item }: Props) => {
+export const CartItem = ({
+  item,
+  onIncrement,
+  onDecrement,
+  onRemove,
+}: Props) => {
   return (
     <li className="flex py-6">
       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
@@ -30,16 +38,29 @@ export const CartItem = ({ item }: Props) => {
         </div>
         <div className="flex justify-between">
           <div className="flex items-center rounded-lg border">
-            <Button variant="ghost" size="icon">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => onDecrement(item.id)}
+            >
               -
             </Button>
             <span className="font-medium px-2">{item.quantity}</span>
-            <Button variant="ghost" size="icon">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => onIncrement(item.id)}
+            >
               +
             </Button>
           </div>
           <div>
-            <Button variant="link" size="sm" className="pr-0 opacity-80">
+            <Button
+              variant="link"
+              size="sm"
+              className="pr-0 opacity-80"
+              onClick={() => onRemove(item.id)}
+            >
               Remove
             </Button>
           </div>
