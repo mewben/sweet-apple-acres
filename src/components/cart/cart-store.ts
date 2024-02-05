@@ -1,16 +1,19 @@
 import { create } from "zustand";
-import { Product } from "~/lib/types";
+import { CartItem, Product } from "~/lib/types";
 
 type State = {
-  items: Record<string, Product & { count: number }>;
+  items: Record<string, CartItem>;
+  isOpen: boolean;
 };
 
 type Actions = {
   add: (product: Product) => void;
+  toggleCart: (isOpen: boolean) => void;
 };
 
 export const useCart = create<State & Actions>((set) => ({
   items: {},
+  isOpen: false,
   add: (product: Product) =>
     set((state) => {
       // check if product is already in the cart
@@ -22,7 +25,7 @@ export const useCart = create<State & Actions>((set) => ({
             ...state.items,
             [product.id]: {
               ...product,
-              count: 1,
+              quantity: 1,
             },
           },
         };
@@ -34,10 +37,11 @@ export const useCart = create<State & Actions>((set) => ({
             ...state.items,
             [product.id]: {
               ...state.items[product.id],
-              count: state.items[product.id].count + 1,
+              quantity: state.items[product.id].quantity + 1,
             },
           },
         };
       }
     }),
+  toggleCart: (isOpen: boolean) => set(() => ({ isOpen })),
 }));

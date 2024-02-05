@@ -5,18 +5,18 @@ import { Button } from "../ui/button";
 import { useCart } from "./cart-store";
 
 export const CartIcon = () => {
-  const { items } = useCart();
+  const { items, toggleCart } = useCart();
 
   const totalCount = useMemo(() => {
     return Object.values(items).reduce(
-      (accumulator, product) => product.count + accumulator,
+      (accumulator, product) => product.quantity + accumulator,
       0
     );
   }, [items]);
 
   return (
     <div className="relative">
-      <Button variant="ghost" size="icon">
+      <Button variant="ghost" size="icon" onClick={() => toggleCart(true)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

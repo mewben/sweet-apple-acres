@@ -7,3 +7,5 @@ export type Product = {
   rating: number;
   isAvailable: boolean;
 };
+
+export type CartItem = Product & { quantity: number };

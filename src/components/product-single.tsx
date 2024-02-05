@@ -20,6 +20,7 @@ export default function ProductSingle({ product }: Props) {
             height={512}
             quality={100}
             className="h-full w-full object-cover object-center group-hover:opacity-75"
+            priority
           />
         </div>
       </div>
