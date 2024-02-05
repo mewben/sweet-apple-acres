@@ -26,7 +26,7 @@ import { useTransition } from "react";
 import { placeOrder } from "~/lib/products-api";
 import { CartItem } from "~/lib/types";
 
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "../ui/use-toast";
 
 const COUNTRIES: Record<string, string> = {
@@ -66,6 +66,7 @@ type Props = {
 
 const ShippingForm = ({ items, disabled, onSuccess }: Props) => {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -97,7 +98,7 @@ const ShippingForm = ({ items, disabled, onSuccess }: Props) => {
       try {
         await placeOrder(preparedData);
         onSuccess();
-        redirect("/checkout/success");
+        router.replace("/checkout/success");
       } catch (error) {
         toast({
           title: "Oops! Something went wrong",

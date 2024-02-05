@@ -27,7 +27,7 @@ export const CartIcon = () => {
         </svg>
         {totalCount > 0 && (
           <span
-            className="absolute top-0 right-0 bg-red-600 text-white text-nowrap text-xs font-bold rounded-full bg-opacity-80 z-10 tracking-tighter -mt-2 -mr-2 flex items-center justify-center min-h-6 min-w-6"
+            className="absolute top-0 right-0 bg-red-600 text-white text-nowrap text-xs font-bold rounded-full bg-opacity-80 z-10 tracking-tighter -mt-2 -mr-2 flex items-center justify-center min-h-5 min-w-5"
             aria-label="cart-items"
           >
             {totalCount}
