@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import {
@@ -17,6 +18,13 @@ import { useCart } from "./cart-store";
 export const CartSummary = () => {
   const { items, isOpen, toggleCart } = useCart();
 
+  const subTotal = useMemo(() => {
+    return Object.values(items).reduce(
+      (accumulator, product) => product.quantity * product.price + accumulator,
+      0
+    );
+  }, [items]);
+
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
       <SheetContent className="max-w-full w-full sm:max-w-md">
@@ -32,7 +40,7 @@ export const CartSummary = () => {
           <div className="py-8 flex flex-col sm:flex-col border-t">
             <div className="flex justify-between text-lg font-medium">
               <p>Subtotal</p>
-              <p>TODO: $259.00</p>
+              <p>${subTotal}</p>
             </div>
             <p className="mb-8 text-sm text-muted-foreground">
               Shipping and taxes calculated at checkout.
