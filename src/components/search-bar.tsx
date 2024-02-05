@@ -1,11 +1,26 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 
 export const SearchBar = () => {
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const delayBounceFn = setTimeout(() => {
+      console.log("TODO: search api here", search);
+    }, 300);
+
+    return () => clearTimeout(delayBounceFn);
+  }, [search]);
+
   return (
     <div className="relative w-full">
-      <Input placeholder="Search Products..." className="pr-8 w-full" />
+      <Input
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search Products..."
+        className="pr-8 w-full"
+      />
       <div className="absolute right-0 top-0 mr-3 flex h-full items-center text-muted-foreground">
         <svg
           xmlns="http://www.w3.org/2000/svg"
