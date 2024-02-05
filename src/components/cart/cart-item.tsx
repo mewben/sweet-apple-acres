@@ -20,7 +20,7 @@ export const CartItem = ({
 }: Props) => {
   return (
     <li className="flex py-6">
-      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
+      <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border">
         <Image
           src={item.image ?? "/placeholder-img.jpg"}
           alt={item.name}

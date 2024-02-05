@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import Link from "next/link";
+import { useCart } from "./cart-store";
 
 const COUNTRIES: Record<string, string> = {
   us: "United States",
@@ -52,7 +53,11 @@ const formSchema = z.object({
   }),
 });
 
-export const ShippingForm = () => {
+type Props = {
+  disabled: boolean;
+};
+
+const ShippingForm = ({ disabled }) => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -75,71 +80,39 @@ export const ShippingForm = () => {
   }
 
   return (
-    <div className="space-y-4 mt-12">
-      <h3 className="text-lg font-semibold">Shipping information</h3>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="country"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Country/Region</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Country/Region" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Object.keys(COUNTRIES).map((countryCode) => (
+                    <SelectItem value={countryCode} key={countryCode}>
+                      {COUNTRIES[countryCode]}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="grid grid-cols-2 gap-6">
           <FormField
             control={form.control}
-            name="country"
+            name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Country/Region</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Country/Region" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {Object.keys(COUNTRIES).map((countryCode) => (
-                      <SelectItem value={countryCode} key={countryCode}>
-                        {COUNTRIES[countryCode]}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid grid-cols-2 gap-6">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Apartment, Street, etc.</FormLabel>
+                <FormLabel>First Name</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -147,56 +120,93 @@ export const ShippingForm = () => {
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-3 gap-6">
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="state"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>State</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="zip"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Zip Code</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <hr />
-          <Button type="submit" className="w-full" size="lg">
-            Confirm Order
-          </Button>
-          <Button variant="link" asChild>
-            <Link href="/">&larr; or Continue Shopping</Link>
-          </Button>
-        </form>
-      </Form>
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Apartment, Street, etc.</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="grid grid-cols-3 gap-6">
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>City</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="state"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>State</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="zip"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Zip Code</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <hr />
+        <Button type="submit" className="w-full" size="lg" disabled={disabled}>
+          Confirm Order
+        </Button>
+        <Button variant="link" asChild>
+          <Link href="/">&larr; or Continue Shopping</Link>
+        </Button>
+      </form>
+    </Form>
+  );
+};
+
+export const ShippingFormWrapper = () => {
+  const { items } = useCart();
+
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Shipping information</h3>
+      <ShippingForm disabled={Object.keys(items).length === 0} />
     </div>
   );
 };

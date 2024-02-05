@@ -33,15 +33,17 @@ export const CartSummary = () => {
         </SheetHeader>
         <div className="flex h-full flex-col justify-between overflow-hidden">
           <ScrollArea>
-            {Object.values(items).map((item) => (
-              <CartItem
-                item={item}
-                key={item.id}
-                onIncrement={increment}
-                onDecrement={decrement}
-                onRemove={remove}
-              />
-            ))}
+            <ul>
+              {Object.values(items).map((item) => (
+                <CartItem
+                  item={item}
+                  key={item.id}
+                  onIncrement={increment}
+                  onDecrement={decrement}
+                  onRemove={remove}
+                />
+              ))}
+            </ul>
           </ScrollArea>
           <div className="py-8 flex flex-col sm:flex-col border-t">
             <div className="flex justify-between text-lg font-medium">
