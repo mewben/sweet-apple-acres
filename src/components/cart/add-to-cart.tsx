@@ -10,12 +10,17 @@ type Props = {
 };
 
 export const AddToCart = ({ product, disabled }: Props) => {
-  const { add } = useCart();
+  const { add, toggleCart } = useCart();
+
+  const onClick = () => {
+    add(product);
+    toggleCart(true);
+  };
 
   return (
     <div className="pt-8">
       <Button
-        onClick={() => add(product)}
+        onClick={onClick}
         aria-label="Add to cart"
         size="lg"
         className="w-full"
