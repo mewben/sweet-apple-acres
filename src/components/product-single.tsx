@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { Product } from "~/lib/types";
 import { Rating } from "./ui/rating";
 import { Badge } from "./ui/badge";
 import { AddToCart } from "./cart/add-to-cart";
 import { Price } from "./cart/price";
+import { ProductImage } from "./cart/product-image";
 
 type Props = {
   product: Product;
@@ -14,15 +14,7 @@ export default function ProductSingle({ product }: Props) {
     <div className="flex flex-col md:flex-row md:p-12 md:gap-8">
       <div className="basis-full lg:basis-7/12">
         <div className="aspect-square text-center h-full w-full max-w-[512px] overflow-hidden rounded-lg mx-auto">
-          <Image
-            src={product.image ?? "/placeholder-img.jpg"}
-            alt={product.name}
-            width={512}
-            height={512}
-            quality={100}
-            className="h-full w-full object-cover object-center group-hover:opacity-75"
-            priority
-          />
+          <ProductImage src={product.image} alt={product.name} priority />
         </div>
       </div>
       <div className="basis-full lg:basis-5/12 space-y-4 mt-12 md:mt-0">
