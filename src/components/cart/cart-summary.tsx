@@ -12,11 +12,11 @@ import {
 } from "../ui/sheet";
 import { CartItem } from "./cart-item";
 import { useCart } from "./cart-store";
+import Link from "next/link";
 
 export const CartSummary = () => {
   const { items, updatedAt, isOpen, toggleCart, increment, decrement, remove } =
     useCart();
-  console.log("items", items);
 
   const subTotal = useMemo(() => {
     return Object.values(items).reduce(
@@ -51,9 +51,11 @@ export const CartSummary = () => {
             <p className="mb-8 text-sm text-muted-foreground">
               Shipping and taxes calculated at checkout.
             </p>
-            <Button className="w-full" size="lg">
-              Checkout
-            </Button>
+            <SheetClose asChild>
+              <Button className="w-full" size="lg" asChild>
+                <Link href="/checkout">Checkout</Link>
+              </Button>
+            </SheetClose>
             <SheetClose asChild>
               <Button variant="link">or Continue Shopping &rarr;</Button>
             </SheetClose>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { CartItem as CartItemType } from "~/lib/types";
 import { Button } from "../ui/button";
+import { SheetClose } from "../ui/sheet";
 
 type Props = {
   item: CartItemType;
@@ -32,7 +33,9 @@ export const CartItem = ({
       <div className="ml-4 flex flex-col flex-1 justify-between">
         <div className="flex justify-between text-base font-medium">
           <h3>
-            <Link href={`/product/${item.id}`}>{item.name}</Link>
+            <SheetClose asChild>
+              <Link href={`/product/${item.id}`}>{item.name}</Link>
+            </SheetClose>
           </h3>
           <p>${item.price * item.quantity}</p>
         </div>
