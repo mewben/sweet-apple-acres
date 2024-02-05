@@ -14,7 +14,7 @@ export const Header = () => {
           >
             <Link href="/">
               <span>🍎 </span>
-              <span className="hidden md:block">Sweet Apple Acres</span>
+              <span className="hidden md:block"> Sweet Apple Acres</span>
             </Link>
           </Button>
         </div>

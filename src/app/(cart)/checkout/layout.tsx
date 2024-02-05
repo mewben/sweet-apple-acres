@@ -3,5 +3,5 @@ export default function CheckoutLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>TODO: Checkout layout {children}</div>;
+  return <div className="min-h-screen min-w-screen">{children}</div>;
 }
