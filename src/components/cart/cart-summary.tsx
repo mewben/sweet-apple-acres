@@ -11,10 +11,11 @@ import {
   SheetHeader,
   SheetTitle,
 } from "../ui/sheet";
+import { CartItem } from "./cart-item";
 import { useCart } from "./cart-store";
 
 export const CartSummary = () => {
-  const { isOpen, toggleCart } = useCart();
+  const { items, isOpen, toggleCart } = useCart();
 
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
@@ -23,7 +24,11 @@ export const CartSummary = () => {
           <SheetTitle>My Cart</SheetTitle>
         </SheetHeader>
         <div className="flex h-full flex-col justify-between overflow-hidden">
-          <ScrollArea>TODO: cart items here</ScrollArea>
+          <ScrollArea>
+            {Object.values(items).map((item) => (
+              <CartItem item={item} key={item.id} />
+            ))}
+          </ScrollArea>
           <div className="py-8 flex flex-col sm:flex-col border-t">
             <div className="flex justify-between text-lg font-medium">
               <p>Subtotal</p>
