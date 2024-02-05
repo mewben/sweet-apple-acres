@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Price } from "./price";
 
 const SHIPPING_FEE = 0; // Hardcoded for now;
-const TAX = 0; // 5%, Hardcoded for now;
+const TAX = 0; // Hardcoded for now;
 
 type Props = {
   items: Record<string, CartItem>;
@@ -57,7 +57,7 @@ const OrderSummary = ({ items = {}, subTotal, tax, total }: Props) => {
 };
 
 export const OrderSummaryWrapper = () => {
-  const { items, updatedAt } = useCart();
+  const { items, updatedAt, _hasHydrated } = useCart();
 
   const { subTotal, tax, total } = useMemo(() => {
     const subTotal = Object.values(items).reduce(
@@ -69,6 +69,8 @@ export const OrderSummaryWrapper = () => {
 
     return { subTotal, tax, total };
   }, [updatedAt]);
+
+  if (!_hasHydrated) return null;
 
   return (
     <div className="flex flex-col">

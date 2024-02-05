@@ -11,7 +11,7 @@ export const OrderItem = ({ item }: Props) => {
   return (
     <li className="flex py-6 border-b">
       <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border">
-        <ProductImage src={item.image} alt={item.name} />
+        <ProductImage src={item.image} alt={item.name} priority />
       </div>
       <div className="ml-4 flex flex-col flex-1">
         <div className="flex justify-between text-base font-medium">
