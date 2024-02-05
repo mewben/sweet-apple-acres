@@ -17,9 +17,5 @@ export default async function ProductPage({ params }: Props) {
     );
   }
 
-  return (
-    <div>
-      <ProductSingle product={product} />
-    </div>
-  );
+  return <ProductSingle product={product} />;
 }

@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "~/lib/utils";
-import { TooltipProvider } from "~/components/ui/tooltip";
-import { Header } from "~/components/header";
-import { Footer } from "~/components/footer";
-import { CartSummary } from "~/components/cart/cart-summary";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -27,12 +23,7 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        <TooltipProvider>
-          <Header />
-          <main className="container">{children}</main>
-          <Footer />
-          <CartSummary />
-        </TooltipProvider>
+        {children}
       </body>
     </html>
   );
