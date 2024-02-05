@@ -9,3 +9,14 @@ export type Product = {
 };
 
 export type CartItem = Product & { quantity: number };
+
+export type OrderItem = {
+  productId: string;
+  quantity: number;
+};
+
+export type PlaceOrderType = {
+  name: string;
+  deliveryAddress: string;
+  items: OrderItem[];
+};

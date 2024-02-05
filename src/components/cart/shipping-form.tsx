@@ -3,7 +3,6 @@
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,6 +22,12 @@ import {
 } from "../ui/select";
 import Link from "next/link";
 import { useCart } from "./cart-store";
+import { useTransition } from "react";
+import { placeOrder } from "~/lib/products-api";
+import { CartItem } from "~/lib/types";
+
+import { redirect } from "next/navigation";
+import { toast } from "../ui/use-toast";
 
 const COUNTRIES: Record<string, string> = {
   us: "United States",
@@ -54,10 +59,14 @@ const formSchema = z.object({
 });
 
 type Props = {
+  items: Record<string, CartItem>;
   disabled: boolean;
+  onSuccess: () => void;
 };
 
-const ShippingForm = ({ disabled }) => {
+const ShippingForm = ({ items, disabled, onSuccess }: Props) => {
+  const [isPending, startTransition] = useTransition();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,9 +83,29 @@ const ShippingForm = ({ disabled }) => {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    const preparedData = {
+      name: `${values.firstName} ${values.lastName}`,
+      deliveryAddress: `${values.address}, ${values.city}, ${values.state}, ${
+        values.zip
+      }, ${COUNTRIES[values.country]}`,
+      items: Object.values(items).map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      })),
+    };
+    startTransition(async () => {
+      try {
+        await placeOrder(preparedData);
+        onSuccess();
+        redirect("/checkout/success");
+      } catch (error) {
+        toast({
+          title: "Oops! Something went wrong",
+          description: "Please try again later.",
+          variant: "destructive",
+        });
+      }
+    });
   }
 
   return (
@@ -189,8 +218,13 @@ const ShippingForm = ({ disabled }) => {
           />
         </div>
         <hr />
-        <Button type="submit" className="w-full" size="lg" disabled={disabled}>
-          Confirm Order
+        <Button
+          type="submit"
+          className="w-full"
+          size="lg"
+          disabled={disabled || isPending}
+        >
+          {isPending ? "Placing order..." : "Confirm Order"}
         </Button>
         <Button variant="link" asChild>
           <Link href="/">&larr; or Continue Shopping</Link>
@@ -201,12 +235,16 @@ const ShippingForm = ({ disabled }) => {
 };
 
 export const ShippingFormWrapper = () => {
-  const { items } = useCart();
+  const { items, reset } = useCart();
 
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">Shipping information</h3>
-      <ShippingForm disabled={Object.keys(items).length === 0} />
+      <ShippingForm
+        items={items}
+        disabled={Object.keys(items).length === 0}
+        onSuccess={() => reset()}
+      />
     </div>
   );
 };

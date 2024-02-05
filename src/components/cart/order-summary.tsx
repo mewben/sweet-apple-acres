@@ -7,8 +7,8 @@ import { CartItem } from "~/lib/types";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-const SHIPPING_FEE = 9.85; // Hardcoded for now;
-const TAX = 5; // 5%, Hardcoded for now;
+const SHIPPING_FEE = 0; // Hardcoded for now;
+const TAX = 0; // 5%, Hardcoded for now;
 
 type Props = {
   items: Record<string, CartItem>;

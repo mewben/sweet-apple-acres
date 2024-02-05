@@ -1,5 +1,5 @@
 import ProductsList from "~/components/products-list";
-import { fetchProducts } from "~/lib/fetch-products";
+import { fetchProducts } from "~/lib/products-api";
 
 export default async function HomePage() {
   const products = await fetchProducts();

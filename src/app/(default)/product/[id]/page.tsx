@@ -1,5 +1,5 @@
 import ProductSingle from "~/components/product-single";
-import { fetchProduct } from "~/lib/fetch-products";
+import { fetchProduct } from "~/lib/products-api";
 
 type Props = {
   params: {

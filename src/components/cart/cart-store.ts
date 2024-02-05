@@ -13,6 +13,7 @@ type Actions = {
   increment: (productId: string) => void;
   decrement: (productId: string) => void;
   remove: (productId: string) => void;
+  reset: () => void;
 };
 
 export const useCart = create<State & Actions>((set) => ({
@@ -108,4 +109,5 @@ export const useCart = create<State & Actions>((set) => ({
         items: updatedItems,
       };
     }),
+  reset: () => set({ items: {} }),
 }));
