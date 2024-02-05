@@ -14,7 +14,8 @@ import { CartItem } from "./cart-item";
 import { useCart } from "./cart-store";
 
 export const CartSummary = () => {
-  const { items, isOpen, toggleCart, increment, decrement, remove } = useCart();
+  const { items, updatedAt, isOpen, toggleCart, increment, decrement, remove } =
+    useCart();
   console.log("items", items);
 
   const subTotal = useMemo(() => {
@@ -22,7 +23,7 @@ export const CartSummary = () => {
       (accumulator, product) => product.quantity * product.price + accumulator,
       0
     );
-  }, [items]);
+  }, [updatedAt]);
 
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>

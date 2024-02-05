@@ -4,6 +4,7 @@ import { CartItem, Product } from "~/lib/types";
 type State = {
   items: Record<string, CartItem>;
   isOpen: boolean;
+  updatedAt: Date; // used in useMemo to trigger recomputation
 };
 
 type Actions = {
@@ -17,6 +18,7 @@ type Actions = {
 export const useCart = create<State & Actions>((set) => ({
   items: {},
   isOpen: false,
+  updatedAt: new Date(),
   add: (product: Product) =>
     set((state) => {
       // check if product is already in the cart
@@ -24,6 +26,7 @@ export const useCart = create<State & Actions>((set) => ({
       if (!foundProduct) {
         return {
           ...state,
+          updatedAt: new Date(),
           items: {
             ...state.items,
             [product.id]: {
@@ -36,6 +39,7 @@ export const useCart = create<State & Actions>((set) => ({
         // increment item by 1
         return {
           ...state,
+          updatedAt: new Date(),
           items: {
             ...state.items,
             [product.id]: {
@@ -53,6 +57,7 @@ export const useCart = create<State & Actions>((set) => ({
       if (!foundProduct) return state;
       return {
         ...state,
+        updatedAt: new Date(),
         items: {
           ...state.items,
           [productId]: {
@@ -73,12 +78,14 @@ export const useCart = create<State & Actions>((set) => ({
         delete updatedItems[productId];
         return {
           ...state,
+          updatedAt: new Date(),
           items: updatedItems,
         };
       }
 
       return {
         ...state,
+        updatedAt: new Date(),
         items: {
           ...state.items,
           [productId]: {
@@ -97,6 +104,7 @@ export const useCart = create<State & Actions>((set) => ({
       delete updatedItems[productId];
       return {
         ...state,
+        updatedAt: new Date(),
         items: updatedItems,
       };
     }),

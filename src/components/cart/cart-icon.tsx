@@ -5,14 +5,14 @@ import { Button } from "../ui/button";
 import { useCart } from "./cart-store";
 
 export const CartIcon = () => {
-  const { items, toggleCart } = useCart();
+  const { items, updatedAt, toggleCart } = useCart();
 
   const totalCount = useMemo(() => {
     return Object.values(items).reduce(
       (accumulator, product) => product.quantity + accumulator,
       0
     );
-  }, [items]);
+  }, [updatedAt]);
 
   return (
     <div className="relative">
