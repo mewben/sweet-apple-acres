@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ShippingForm } from "~/components/cart/shipping-form";
 
 export default async function CheckoutPage() {
   return (
@@ -10,7 +11,7 @@ export default async function CheckoutPage() {
             <span>🍎</span>
             <span>Sweet Apple Acres</span>
           </Link>
-          TODO: shipping form
+          <ShippingForm />
         </div>
       </div>
     </div>
