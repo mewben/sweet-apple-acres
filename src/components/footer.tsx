@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Logo } from "./logo";
 
 const footerLinks = [
   {
@@ -28,12 +29,9 @@ export const Footer = () => {
     <footer className="border-t py-12 mt-12">
       <div className="container">
         <div className="flex flex-col md:flex-row items-start">
-          <h5 className="text-lg font-semibold tracking-tight flex items-center mb-4">
-            <span>🍎 </span>
-            <span>Sweet Apple Acres</span>
-          </h5>
+          <Logo className="mb-4 scale-75 opacity-50" />
           <nav className="md:ml-24">
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col md:flex-row gap-2">
               {footerLinks.map((item, i) => (
                 <li key={i}>
                   <Button variant="link" asChild>
