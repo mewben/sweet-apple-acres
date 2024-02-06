@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍎 Sweet Apple Acres
 
-## Getting Started
+A simple demo for ordering bulk produce.
 
-First, run the development server:
+## [Demo](https://google.com)
+
+![App Screenshot](https://lh3.googleusercontent.com/pw/ABLVV87O94DwV9yafijuht-Xnc2z0bBi5T-f5lAn4rU-KYjf-c-PY-h4wyx-nFfAUPek8you8NUXl3E04gbaooV8Z-DYjnjPGiLgxW3ZxFD6nsrWz1AL68CUdyjj-uQEHxe79CwRpxd78PNEddpmgZS9mbXvKlSktyu2p871Q4rir7BxqJelyCzXKFonXylz-NcDddFenZF6B1OTx5BTmpHSAFbUery3FP7_X61SX1Js34fp4hbigpTAmZGA-M4vd9pDVjCvpr1crdlp5QeWOC3NCmZQRv6GDXP5b3EC-S3CS0Y-fDonzmht8O8x7SyX_PJKPFwlIroJIZRwNvEpcXpdp2wOFDtVunCfdcYAThOtXMJorZb-Ozanguj0MgyU2A3UoeIP3Clz02tx4rbHqeSfEr_TDbKWsYHAzjy9-hUodvQZ705Sy8bfY7hrWtVm821063Lx4gdAyaUQkA7Z15PPJIsv9H2a4Ul9EHkHyd39fKb1R5xI-m1yiLXGtNaBagQtyi2m9ATsba68qeaQqzI-Uc1VYwdKMzN1q2k-vl03t74ie2sgRgHz1ep0XLpFSukOEhQKZiR4TCQXgh4AGhI_lzOSOXaWNCqU3-EGLngEuaxjNqcuvdtDE70el9kXGR4Us0wvbeKEuwcmC4FjO9tntgi_Qlwh2WNXhc8s3vaZ16pHKoEeM0yQ1-0kI6b_Np8K5JyxE_c3p60eY1rUmDD5nyAk8cNnW7QD8-N1FlhX9qQhWgw8rHFh21kTuGZo_QoVtwJHq0gt4QCxT820_9ORJuEH5Cam-Z0ztCIEChw5xMes6S6IFiigqvmMXkMKOTuuJ-WhN7v4EFhNZ0pkfeuKFZbpA2i9M2I_H_KK4Nw3Nu2FscW8brjHGiQ0zG6DSZBiV6rRYcSDss8HaGMWW9ZFvJvQcM83Z8VdIJt1jxZyyvZGQboLyrldMglFtx_56g=w2768-h1716-s-no-gm?authuser=0)
+
+## Features
+
+- List products
+- Search Products
+- Filter Products
+- List Pagination
+- Add to Cart with editable cart items
+- Checkout page form
+- Place order
+
+### Tech Features
+
+- Server Side Rendering (SSR) of pages (for SEO)
+- Light, Dark, and System Mode
+- Server Side Fetching
+- Server Actions
+- Mobile Responsive
+
+## Tech Stack
+
+- NextJS
+- Shadcn UI with TailwindCSS
+- Zod
+- Zustand for state management
+- React Hook Form
+- Vitest & React Testing Library for Component Unit tests
+- Playwright for e2e testing
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://link-to-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd my-project
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Go to http://localhost:3000 in the browser
 
-## Deploy on Vercel
+## Other Screenshots
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Checkout Screenshot](https://lh3.googleusercontent.com/pw/ABLVV87P9EmeX2p5--HC38p6AHMrewzoECQ8OstQKaTSH7vpdNG5HC2CZzmajR6r7ZWK0JnxhKHu2ci_TeE1SxkfhsT0xM5IRmcZGeEJ087SoScGT43bZjy5VuurL7dI2ORyxs7sZlV3Dreotysj1NDIbaQvh2HMHN8kxq3Y8A-6oGQ7xyJtfiXVZvrnDvzaFF_4R-0mTezv9INQ4vjSssLrrVBb2Sq1vjfqm3kDva0KgOf3ojTsc5OAxQKLukl9MSrVU_qIUkm0oSd12w4TOVSxzg7kjdiLlKgzX9IBymuZyo6okWj8oVBWyCuEK9GEvVBXPl3TQty6-jgv6HT7Nis7xMf5qTUwE_9LHJv7utjVCFSIsmWUQdsVOKpThTLqT3wmg23SCQQeMIhrRy4TtHajFENU4zgjLq-UlPOrRHt-DWYLQybu90noRE8OhvjZGBwVJcQyJ8EYsYrAHs5ew7juVtJbHeTgw8h8LGmwoVX4fXVwYsBH0z7QlQcZ0WKyiqWNF4boG2ACu1yOjxrW1S7ym0ajOvI8iLSbt_jOoVnRVbvJy5w11yZS1-0D2DQ9A_UlZ-XkCgBtHM-5ltPVgAUXkp1y0yGXpiAv64Kny0aRZDuYOtQmlVGDsMZqZWylWkjqN-Q-ckpwWkag6OhQujT_bh0wiOXGmOCrwZqzU2_AVJdkYY0m1QhY0hPhQsFgWD19roDuxOx73tqKw06bm_kCKdkiZDyvmcwMPsqlQ9cO7nVlKovopJYabDMrYIMFN2wOlOzvolFhl4Bezs9FH5k-9vC_xiTgxzR-V8wOqIMWAVUAta_RGBl5dfnMmI12xM8r2EfDR2XjuI8N_radVVAk8HTGskOATKj8hDvVN3NpZE4CwNPR6Yu3C_bfiQ8EvHgV08IXNWIgtoaFl_h2t4khhYwhfoto68pWfx4bdgm2a16n51bGIXNiha2pnNuMpQ=w2680-h1716-s-no-gm?authuser=0)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Cart Screenshot](https://lh3.googleusercontent.com/pw/ABLVV84haBVwCXpgsl_PBxag6YrxhpaW4woRWA4r9YABBH0UzSXd5obDhRfxyT4T5NG9I1l-PY6KrtKGAVRQHZJI-BkF3Jid0Uxw9PjDEcmy3QBmo0_LWroV7Lj83zaE3IxjNsOA-WqUugaUt7LZmcnUaaqCv74_h-sfGF28N1u5_1Ve79GVRiln-dArWFYaPulV6FaxFbGnJtq_Ddr-2MIP5Y1ibne2bWuoE6ZHX2FNsa7Kq4BQ3CfKo9zBbvVyWF4MLXKebPz8I1Tp1ZlNSfy5cvH63V-FQ9BSio78PEJClI_NIwR89luGlmg1R8vB74VBgyDENlDdm-p46VN0CPIxO_BfxmA1Ny5a-Jr2aGCMXZnL3jIMUtm25CBmKduA1S5cHsk2vill4dcbQMmw8eQbP9txyRA62Dzx8Ys_7hMmjNuMV7xuWEVG7fki2RmmYp2lgOu17OsKPx-TWZ4pJJSJDHQkUPeR1HVenepck4mAXKnOs-k6xA2GfGuF3p5SksW0kArK0aUDOzJh293y3qYRJfX_9SH19Hb1cP7W06DqjB1hjJq8QKOUotwIIkmGpih3Uhu_UJ8X8mkOYy6VYJtJH-5LnDMY_3Df61O1M7tJsDYt1sibkD_pLZSba5ry_6Xs1YjXfTxYEoxoo6fR-kx5QNXkcXNTi4_K1qm3-Zls2miYfAMlZcmA1zeAAsLLXFSevAsQTgbC8Pqm5kXaYcmyairsriQTD4fFjsSEZwEKyfXehUoScN1Q2ZkSXpuMvlGrSlE9vo9JTBhfS7CtVV_spFPi-lPRz32mSlAAE3kHmbp2aryiEGGaudKUmwTA7QxH8UMb6fpO11Jp98psoZfWLaKOTpbB033OqRxG0aT5rO6R7t3Pv-eKKBgRQwVktGanOCRwe9BafSvgtmd-PST6XW37dM-HlWeb5wUAx4BwYrwECcBNl8G6UITciDSwIA=w3188-h1702-s-no-gm?authuser=0)
+
+## Author
+
+- [@mewben](https://www.github.com/mewben)
