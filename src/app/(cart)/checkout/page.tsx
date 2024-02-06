@@ -5,7 +5,7 @@ import { Logo } from "~/components/logo";
 export default async function CheckoutPage() {
   return (
     <div className="flex flex-col md:flex-row-reverse justify-center min-h-screen">
-      <div className="md:w-1/2 p-6 md:p-24 bg-gray-50">
+      <div className="md:w-1/2 p-6 md:p-24 bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col max-w-lg w-full">
           <Logo className="flex md:hidden mb-12" />
           <OrderSummaryWrapper />

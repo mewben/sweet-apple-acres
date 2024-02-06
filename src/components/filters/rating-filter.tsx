@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { Input } from "../ui/input";
 
 type Props = {
   minValue?: string;
@@ -31,22 +32,22 @@ export const RatingFilter = ({
     <div className="flex h-8 border border-dashed rounded-lg gap-1 items-center text-xs font-medium px-3">
       Rating
       <Separator orientation="vertical" className="mx-2 h-4" />
-      <input
+      <Input
         type="number"
         min={0}
         max={5}
         value={min}
-        className="border-0 p-1 no-extra-buttons"
+        className="border-0 p-1 no-extra-buttons h-5 rounded-sm"
         onChange={(e) => setMin(e.target.value)}
         placeholder="0"
       />
       <span>-</span>
-      <input
+      <Input
         type="number"
         min={0}
         max={5}
         value={max}
-        className="border-0 p-1 no-extra-buttons"
+        className="border-0 p-1 no-extra-buttons h-5 rounded-sm"
         onChange={(e) => setMax(e.target.value)}
         placeholder="5"
       />

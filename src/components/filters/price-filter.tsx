@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { Input } from "../ui/input";
 
 type Props = {
   minValue?: string;
@@ -33,11 +34,11 @@ export const PriceFilter = ({
       <Separator orientation="vertical" className="mx-2 h-4" />
       <div>
         <span>$</span>
-        <input
+        <Input
           type="number"
           min={0}
           value={min}
-          className="border-0 p-1 w-12 no-extra-buttons"
+          className="inline border-0 p-1 w-12 no-extra-buttons h-5 rounded-sm"
           onChange={(e) => setMin(e.target.value)}
           placeholder="0.00"
         />
@@ -45,11 +46,11 @@ export const PriceFilter = ({
       <span>-</span>
       <div>
         <span>$</span>
-        <input
+        <Input
           type="number"
           min={0}
           value={max}
-          className="border-0 p-1 w-12 no-extra-buttons"
+          className="inline border-0 p-1 w-12 no-extra-buttons h-5 rounded-sm"
           onChange={(e) => setMax(e.target.value)}
           placeholder="0.00"
         />

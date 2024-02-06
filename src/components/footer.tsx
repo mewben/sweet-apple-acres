@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Logo } from "./logo";
+import { ThemeSwitcher } from "./theme-switcher";
 
 const footerLinks = [
   {
@@ -41,6 +42,7 @@ export const Footer = () => {
               ))}
             </ul>
           </nav>
+          <ThemeSwitcher />
         </div>
       </div>
     </footer>

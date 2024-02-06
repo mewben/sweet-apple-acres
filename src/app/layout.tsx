@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "~/lib/utils";
 import { Toaster } from "~/components/ui/toaster";
 import { Suspense } from "react";
+import { ThemeProvider } from "~/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -25,8 +26,15 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        <Suspense>{children}</Suspense>
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Suspense>{children}</Suspense>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
