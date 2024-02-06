@@ -11,6 +11,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 import { searchFilterQueryBuilder } from "~/lib/search-filter-query-builder";
 import { INITIAL_FILTERS } from "~/lib/constants";
+import { omit } from "lodash";
 
 type Props = {
   searchParams: FetchProductsParams;
@@ -25,13 +26,17 @@ export const FiltersBar = ({ searchParams }: Props) => {
       ...data,
     };
 
+    // omit offset to return to page 1
+    delete merged.offset;
+
     const params = searchFilterQueryBuilder(merged);
 
     router.push(`/?${params}`, { scroll: false });
   };
 
   const isDirty =
-    Object.values(searchParams).filter((value) => !!value).length > 0;
+    Object.values(omit(searchParams, ["limit"])).filter((value) => !!value)
+      .length > 0;
 
   return (
     <div className="flex flex-col md:flex-row gap-2 my-8 items-center">

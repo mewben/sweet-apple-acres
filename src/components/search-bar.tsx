@@ -16,6 +16,9 @@ export const SearchBar = () => {
       const data = Object.fromEntries(searchParams);
       data.search = search;
 
+      // omit offset to return to page 1
+      delete data.offset;
+
       const params = searchFilterQueryBuilder(data);
       router.push(`/?${params}`, { scroll: false });
     }, 300);
