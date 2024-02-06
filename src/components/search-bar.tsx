@@ -9,10 +9,13 @@ export const SearchBar = () => {
   const searchParams = useSearchParams();
   const q = searchParams.get("search") || "";
   const [search, setSearch] = useState(q);
+  const [modified, setModified] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const delayBounceFn = setTimeout(() => {
+      if (!modified) return;
+
       const data = Object.fromEntries(searchParams);
       data.search = search;
 
@@ -24,7 +27,7 @@ export const SearchBar = () => {
     }, 300);
 
     return () => clearTimeout(delayBounceFn);
-  }, [search]);
+  }, [search, modified]);
 
   // reflect search changes from external event
   // like clearing filters
@@ -35,7 +38,10 @@ export const SearchBar = () => {
   return (
     <div className="relative w-full">
       <Input
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setModified(true);
+          setSearch(e.target.value);
+        }}
         placeholder="Search Products..."
         className="pr-8 w-full"
         value={search}
