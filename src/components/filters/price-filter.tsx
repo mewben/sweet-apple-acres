@@ -4,12 +4,16 @@ import { Separator } from "../ui/separator";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 type Props = {
-  minValue: string;
-  maxValue: string;
+  minValue?: string;
+  maxValue?: string;
   onChange: (data: Record<string, string>) => void;
 };
 
-export const PriceFilter = ({ minValue, maxValue, onChange }: Props) => {
+export const PriceFilter = ({
+  minValue = "",
+  maxValue = "",
+  onChange,
+}: Props) => {
   const [min, setMin] = useState(minValue);
   const [max, setMax] = useState(maxValue);
 

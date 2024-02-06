@@ -1,11 +1,11 @@
 import { Filter } from "./filter";
 
 type Props = {
-  value: string;
+  value?: string;
   onChange: (v: string) => void;
 };
 
-export const ShowAvailableFilter = ({ value, onChange }: Props) => {
+export const ShowAvailableFilter = ({ value = "", onChange }: Props) => {
   const options = [
     {
       value: "",

@@ -3,23 +3,31 @@
 import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
+import { searchFilterQueryBuilder } from "~/lib/search-filter-query-builder";
 
-// TODO: activate only when changed
 export const SearchBar = () => {
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const q = searchParams.get("search") || "";
+  const [search, setSearch] = useState(q);
   const router = useRouter();
 
   useEffect(() => {
     const delayBounceFn = setTimeout(() => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("search", search);
+      const data = Object.fromEntries(searchParams);
+      data.search = search;
 
-      router.push(`/?${params.toString()}`, { scroll: false });
+      const params = searchFilterQueryBuilder(data);
+      router.push(`/?${params}`, { scroll: false });
     }, 300);
 
     return () => clearTimeout(delayBounceFn);
   }, [search]);
+
+  // reflect search changes from external event
+  // like clearing filters
+  useEffect(() => {
+    setSearch(q);
+  }, [q]);
 
   return (
     <div className="relative w-full">

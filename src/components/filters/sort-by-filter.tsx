@@ -1,12 +1,16 @@
 import { Filter } from "./filter";
 
 type Props = {
-  value: string;
+  value?: string;
   onChange: (v: string) => void;
 };
 
-export const SortByFilter = ({ value, onChange }: Props) => {
+export const SortByFilter = ({ value = "", onChange }: Props) => {
   const options = [
+    {
+      value: "",
+      label: "Default",
+    },
     {
       value: "name",
       label: "Name",
