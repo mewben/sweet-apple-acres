@@ -40,7 +40,7 @@ export async function fetchProducts(
       products: result,
     };
   } catch (error) {
-    console.log("Error fetching products: ", error);
+    // console.log("Error fetching products: ", error);
     throw error;
   }
 }
@@ -52,7 +52,7 @@ export async function fetchProduct(id: string): Promise<Product | null> {
     );
     return await result.json();
   } catch (error) {
-    console.log("Error fetching product: ", error);
+    // console.log("Error fetching product: ", error);
     return null;
   }
 }
