@@ -6,9 +6,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 // TODO: activate only when changed
 export const SearchBar = () => {
-  const [search, setSearch] = useState("");
-  const router = useRouter();
   const searchParams = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const router = useRouter();
 
   useEffect(() => {
     const delayBounceFn = setTimeout(() => {
@@ -27,6 +27,7 @@ export const SearchBar = () => {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search Products..."
         className="pr-8 w-full"
+        value={search}
       />
       <div className="absolute right-0 top-0 mr-3 flex h-full items-center text-muted-foreground">
         <svg

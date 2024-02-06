@@ -6,7 +6,11 @@ export async function fetchProducts(
   params?: FetchProductsParams
 ): Promise<Product[]> {
   try {
-    const searchParams = new URLSearchParams(params);
+    const searchParams = new URLSearchParams({
+      ...params,
+      orderBy: params?.orderBy ?? "name",
+      sort: params?.sort ?? "DESC",
+    });
 
     const result = await fetch(
       `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products?${searchParams.toString()}`
