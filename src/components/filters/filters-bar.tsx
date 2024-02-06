@@ -9,10 +9,8 @@ import { RatingFilter } from "./rating-filter";
 import { PriceFilter } from "./price-filter";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
-import {
-  initialFilters,
-  searchFilterQueryBuilder,
-} from "~/lib/search-filter-query-builder";
+import { searchFilterQueryBuilder } from "~/lib/search-filter-query-builder";
+import { INITIAL_FILTERS } from "~/lib/constants";
 
 type Props = {
   searchParams: FetchProductsParams;
@@ -67,7 +65,7 @@ export const FiltersBar = ({ searchParams }: Props) => {
       {isDirty && (
         <Button
           variant="outline"
-          onClick={() => onChangeFilter(initialFilters)}
+          onClick={() => onChangeFilter(INITIAL_FILTERS)}
           className="h-8 text-xs"
         >
           <Cross2Icon className="h-3 w-3" />

@@ -1,4 +1,5 @@
 import { FiltersBar } from "~/components/filters/filters-bar";
+import { PaginationBar } from "~/components/filters/pagination-bar";
 import ProductsList from "~/components/products-list";
 import { fetchProducts } from "~/lib/products-api";
 
@@ -13,6 +14,7 @@ export default async function HomePage({ searchParams }: Props) {
     <>
       <FiltersBar searchParams={searchParams} />
       <ProductsList products={products} />
+      <PaginationBar searchParams={searchParams} />
     </>
   );
 }

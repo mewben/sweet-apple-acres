@@ -1,12 +1,14 @@
+import { DEFAULT_LIMIT_PER_PAGE, EXTERNAL_API_BASE_URL } from "./constants";
 import { FetchProductsParams, PlaceOrderType, Product } from "./types";
-
-const EXTERNAL_API_BASE_URL = "https://sweet-apple-acres.netlify.app";
 
 export async function fetchProducts(
   params?: FetchProductsParams
 ): Promise<Product[]> {
   try {
-    const searchParams = new URLSearchParams(params);
+    const searchParams = new URLSearchParams({
+      ...params,
+      limit: params?.limit ?? DEFAULT_LIMIT_PER_PAGE,
+    });
 
     const result = await fetch(
       `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products?${searchParams.toString()}`

@@ -1,16 +1,5 @@
 import { omitBy, isEmpty } from "lodash";
 
-export const initialFilters = {
-  search: "",
-  minPrice: "",
-  maxPrice: "",
-  minRating: "",
-  maxRating: "",
-  orderBy: "",
-  sort: "",
-  isAvailable: "",
-};
-
 /**
  * This returns a querystring
  * with empty values removed

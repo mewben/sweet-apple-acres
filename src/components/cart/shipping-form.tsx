@@ -28,11 +28,7 @@ import { CartItem } from "~/lib/types";
 
 import { useRouter } from "next/navigation";
 import { toast } from "../ui/use-toast";
-
-const COUNTRIES: Record<string, string> = {
-  us: "United States",
-  ph: "Philippines",
-};
+import { COUNTRIES } from "~/lib/constants";
 
 const formSchema = z.object({
   country: z.string().min(2, {
