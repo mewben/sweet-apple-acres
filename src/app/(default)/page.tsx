@@ -1,8 +1,18 @@
+import { Filters } from "~/components/filters";
 import ProductsList from "~/components/products-list";
 import { fetchProducts } from "~/lib/products-api";
 
-export default async function HomePage() {
-  const products = await fetchProducts();
+type Props = {
+  searchParams: Record<string, string | undefined>;
+};
 
-  return <ProductsList products={products} />;
+export default async function HomePage({ searchParams }: Props) {
+  const products = await fetchProducts(searchParams);
+
+  return (
+    <>
+      <Filters searchParams={searchParams} />
+      <ProductsList products={products} />
+    </>
+  );
 }

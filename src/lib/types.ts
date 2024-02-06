@@ -20,3 +20,16 @@ export type PlaceOrderType = {
   deliveryAddress: string;
   items: OrderItem[];
 };
+
+export type FetchProductsParams = {
+  search?: string;
+  minRating?: string;
+  maxRating?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  isAvailable?: string;
+  limit?: string;
+  offset?: string;
+  orderBy?: string;
+  sort?: string;
+};

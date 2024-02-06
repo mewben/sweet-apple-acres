@@ -1,11 +1,15 @@
-import { PlaceOrderType, Product } from "./types";
+import { FetchProductsParams, PlaceOrderType, Product } from "./types";
 
 const EXTERNAL_API_BASE_URL = "https://sweet-apple-acres.netlify.app";
 
-export async function fetchProducts(): Promise<Product[]> {
+export async function fetchProducts(
+  params?: FetchProductsParams
+): Promise<Product[]> {
   try {
+    const searchParams = new URLSearchParams(params);
+
     const result = await fetch(
-      `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products`
+      `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products?${searchParams.toString()}`
     );
     return await result.json();
   } catch (error) {

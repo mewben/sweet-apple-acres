@@ -2,13 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
+import { useRouter, useSearchParams } from "next/navigation";
 
+// TODO: activate only when changed
 export const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const delayBounceFn = setTimeout(() => {
-      console.log("TODO: search api here", search);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("search", search);
+
+      router.push(`/?${params.toString()}`, { scroll: false });
     }, 300);
 
     return () => clearTimeout(delayBounceFn);
