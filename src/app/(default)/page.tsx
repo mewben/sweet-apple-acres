@@ -8,13 +8,13 @@ type Props = {
 };
 
 export default async function HomePage({ searchParams }: Props) {
-  const products = await fetchProducts(searchParams);
+  const { products, totalCount } = await fetchProducts(searchParams);
 
   return (
     <>
       <FiltersBar searchParams={searchParams} />
       <ProductsList products={products} />
-      <PaginationBar searchParams={searchParams} />
+      <PaginationBar searchParams={searchParams} totalCount={totalCount} />
     </>
   );
 }

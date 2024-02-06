@@ -1,22 +1,47 @@
 import { DEFAULT_LIMIT_PER_PAGE, EXTERNAL_API_BASE_URL } from "./constants";
 import { FetchProductsParams, PlaceOrderType, Product } from "./types";
+import { omit } from "lodash";
+
+type FetchReturnType = {
+  totalCount: number;
+  products: Product[];
+};
 
 export async function fetchProducts(
   params?: FetchProductsParams
-): Promise<Product[]> {
+): Promise<FetchReturnType> {
   try {
-    const searchParams = new URLSearchParams({
+    const allParams = {
       ...params,
       limit: params?.limit ?? DEFAULT_LIMIT_PER_PAGE,
-    });
+      offset: params?.offset ?? "0",
+    };
 
-    const result = await fetch(
-      `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products?${searchParams.toString()}`
+    const paramsWithoutPagination = omit(allParams, ["limit", "offset"]);
+    const searchParamsWithoutPagination = new URLSearchParams(
+      paramsWithoutPagination
     );
-    return await result.json();
+    const searchParams = new URLSearchParams(allParams);
+
+    // get all products with filter without limit and offset
+    // to get the total number of products
+
+    const [allResult, result] = await Promise.all([
+      fetch(
+        `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products?${searchParamsWithoutPagination.toString()}`
+      ),
+      fetch(
+        `${EXTERNAL_API_BASE_URL}/.netlify/functions/api/products?${searchParams.toString()}`
+      ),
+    ]).then((res) => Promise.all(res.map(async (r) => await r.json())));
+
+    return {
+      totalCount: allResult.length,
+      products: result,
+    };
   } catch (error) {
     console.log("Error fetching products: ", error);
-    return [];
+    throw error;
   }
 }
 

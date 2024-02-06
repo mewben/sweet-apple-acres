@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-} from "@radix-ui/react-icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 import {
   Select,
@@ -21,10 +16,19 @@ import { DEFAULT_LIMIT_PER_PAGE } from "~/lib/constants";
 
 type Props = {
   searchParams: FetchProductsParams;
+  totalCount: number;
 };
 
-export const PaginationBar = ({ searchParams }: Props) => {
+export const PaginationBar = ({ searchParams, totalCount }: Props) => {
   const router = useRouter();
+
+  const offset = searchParams.offset ?? "0";
+  const limit = searchParams.limit ?? DEFAULT_LIMIT_PER_PAGE;
+  const page = +offset / +limit + 1;
+  const totalPages = Math.ceil(totalCount / +limit);
+
+  const canPrev = page > 1;
+  const canNext = page < totalPages;
 
   const onChange = (data: Record<string, string>) => {
     const merged = {
@@ -33,8 +37,19 @@ export const PaginationBar = ({ searchParams }: Props) => {
     };
 
     const params = searchFilterQueryBuilder(merged);
-
     router.push(`/?${params}`, { scroll: false });
+  };
+
+  const onPrev = () => {
+    onChange({
+      offset: String((page - 1) * +limit),
+    });
+  };
+
+  const onNext = () => {
+    onChange({
+      offset: String(page * +limit),
+    });
   };
 
   return (
@@ -58,25 +73,14 @@ export const PaginationBar = ({ searchParams }: Props) => {
         </Select>
       </div>
       <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-        {/* Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()} */}
-        TODO: Page 1 of 10
+        Page {page} of {totalPages}
       </div>
       <div className="flex items-center space-x-2">
         <Button
           variant="outline"
-          className="hidden h-8 w-8 p-0 lg:flex"
-          // onClick={() => table.setPageIndex(0)}
-          // disabled={!table.getCanPreviousPage()}
-        >
-          <span className="sr-only">Go to first page</span>
-          <DoubleArrowLeftIcon className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
           className="h-8 w-8 p-0"
-          // onClick={() => table.previousPage()}
-          // disabled={!table.getCanPreviousPage()}
+          onClick={onPrev}
+          disabled={!canPrev}
         >
           <span className="sr-only">Go to previous page</span>
           <ChevronLeftIcon className="h-4 w-4" />
@@ -84,20 +88,11 @@ export const PaginationBar = ({ searchParams }: Props) => {
         <Button
           variant="outline"
           className="h-8 w-8 p-0"
-          // onClick={() => table.nextPage()}
-          // disabled={!table.getCanNextPage()}
+          onClick={onNext}
+          disabled={!canNext}
         >
           <span className="sr-only">Go to next page</span>
           <ChevronRightIcon className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          className="hidden h-8 w-8 p-0 lg:flex"
-          // onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          // disabled={!table.getCanNextPage()}
-        >
-          <span className="sr-only">Go to last page</span>
-          <DoubleArrowRightIcon className="h-4 w-4" />
         </Button>
       </div>
     </div>
