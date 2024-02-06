@@ -28,9 +28,9 @@ export const Footer = () => {
   return (
     <footer className="border-t py-12 mt-24">
       <div className="container">
-        <div className="flex flex-col md:flex-row items-start">
-          <Logo className="mb-4 scale-75 opacity-50" />
-          <nav className="md:ml-24">
+        <div className="flex flex-col justify-center items-center">
+          <Logo className="mb-4 scale-75 opacity-60" />
+          <nav>
             <ul className="flex flex-col md:flex-row gap-2">
               {footerLinks.map((item, i) => (
                 <li key={i}>
