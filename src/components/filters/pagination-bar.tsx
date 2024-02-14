@@ -42,7 +42,7 @@ export const PaginationBar = ({ searchParams, totalCount }: Props) => {
 
   const onPrev = () => {
     onChange({
-      offset: String((page - 1) * +limit),
+      offset: String((page - 2) * +limit),
     });
   };
 
