@@ -16,8 +16,16 @@ import Link from "next/link";
 import { Price } from "./price";
 
 export const CartSummary = () => {
-  const { items, updatedAt, isOpen, toggleCart, increment, decrement, remove } =
-    useCart();
+  const {
+    items,
+    updatedAt,
+    isOpen,
+    toggleCart,
+    increment,
+    decrement,
+    remove,
+    reset,
+  } = useCart();
 
   const subTotal = useMemo(() => {
     return Object.values(items).reduce(
@@ -30,7 +38,23 @@ export const CartSummary = () => {
     <Sheet open={isOpen} onOpenChange={toggleCart}>
       <SheetContent className="max-w-full w-full sm:max-w-md">
         <SheetHeader>
-          <SheetTitle>My Cart</SheetTitle>
+          <SheetTitle className="flex gap-2">
+            <p>My Cart</p>
+            <Button variant="outline" size="icon" onClick={() => reset()}>
+              <svg
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                height="1em"
+                width="1em"
+              >
+                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+              </svg>
+            </Button>
+          </SheetTitle>
         </SheetHeader>
         <div className="flex h-full flex-col justify-between overflow-hidden">
           <ScrollArea>

@@ -120,7 +120,7 @@ export const useCart = create<State & Actions>()(
             items: updatedItems,
           };
         }),
-      reset: () => set({ items: {} }),
+      reset: () => set({ items: {}, updatedAt: new Date() }),
     }),
     {
       name: "sweet-apple-acres-storage",
