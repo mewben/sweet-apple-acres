@@ -96,6 +96,7 @@ const ShippingForm = ({ items, disabled, onSuccess }: Props) => {
         onSuccess();
         router.replace("/checkout/success");
       } catch (error) {
+        console.error("Error placing order: ", error);
         toast({
           title: "Oops! Something went wrong",
           description: "Please try again later.",

@@ -25,16 +25,16 @@ const product2 = {
   isAvailable: false,
 };
 
-const product3 = {
-  id: "4b524181-6bfa-476d-a736-99bf08bdb2b7",
-  name: "Apple Butter",
-  description: "Spread made by cooking down apples with sugar and spices.",
-  image: null,
-  price: 5,
-  rating: 4,
-  releated: [],
-  isAvailable: true,
-};
+// const product3 = {
+//   id: "4b524181-6bfa-476d-a736-99bf08bdb2b7",
+//   name: "Apple Butter",
+//   description: "Spread made by cooking down apples with sugar and spices.",
+//   image: null,
+//   price: 5,
+//   rating: 4,
+//   releated: [],
+//   isAvailable: true,
+// };
 
 afterEach(() => {
   cleanup(); // cleanup the dom for each test
