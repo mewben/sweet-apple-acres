@@ -3,11 +3,10 @@ import { PaginationBar } from "~/components/filters/pagination-bar";
 import ProductsList from "~/components/products-list";
 import { fetchProducts } from "~/lib/products-api";
 
-type Props = {
-  searchParams: Record<string, string | undefined>;
-};
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
-export default async function HomePage({ searchParams }: Props) {
+export default async function HomePage(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams
   const { products, totalCount } = await fetchProducts(searchParams);
 
   return (

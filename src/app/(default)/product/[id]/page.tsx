@@ -4,13 +4,10 @@ import ProductSingle from "~/components/product-single";
 import { Button } from "~/components/ui/button";
 import { fetchProduct } from "~/lib/products-api";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
+type Params = Promise<{ id: string }>
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: { params: Params }): Promise<Metadata> {
+  const params = await props.params;
   const product = await fetchProduct(params.id);
 
   return {
@@ -19,7 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProductPage({ params }: Props) {
+export default async function ProductPage(props: { params: Params }) {
+  const params = await props.params;
   const product = await fetchProduct(params.id);
 
   if (!product) {
